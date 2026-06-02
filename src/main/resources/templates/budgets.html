@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="layout :: layout(title='Budgets', content='budgets-content')">
+</th:block>
+<body>
+    <div class="container">
+        <h1 class="page-title">Budgets</h1>
+        
+        <div class="card">
+            <div class="budget-summary">
+                <h2 class="card-title">Create New Budget</h2>
+                <button class="btn btn-primary">Add Budget</button>
+            </div>
+            <form class="form-group">
+                <div class="form-group">
+                    <label class="form-label">Budget Name</label>
+                    <input type="text" class="form-control" placeholder="e.g. Groceries, Rent, Entertainment">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Amount</label>
+                        <input type="number" class="form-control" placeholder="0.00">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Category</label>
+                        <select class="form-control">
+                            <option>Food & Dining</option>
+                            <option>Housing</option>
+                            <option>Transportation</option>
+                            <option>Entertainment</option>
+                            <option>Utilities</option>
+                            <option>Healthcare</option>
+                            <option>Education</option>
+                            <option>Personal Care</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Start Date</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">End Date</label>
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Budget</button>
+            </form>
+        </div>
+        
+        <div class="card">
+            <h2 class="card-title">Current Budgets</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Budget Name</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Spent</th>
+                        <th>Remaining</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Groceries</td>
+                        <td>Food & Dining</td>
+                        <td>400.00</td>
+                        <td>320.00</td>
+                        <td class="negative">80.00</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Rent</td>
+                        <td>Housing</td>
+                        <td>1200.00</td>
+                        <td>1200.00</td>
+                        <td class="negative">0.00</td>
+                        <td>Active</td>
+                    </tr>
+                    <tr>
+                        <td>Entertainment</td>
+                        <td>Entertainment</td>
+                        <td>200.00</td>
+                        <td>50.00</td>
+                        <td class="positive">150.00</td>
+                        <td>Active</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
