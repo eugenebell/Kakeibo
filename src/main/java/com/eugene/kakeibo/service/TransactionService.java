@@ -24,14 +24,14 @@ public class TransactionService {
     }
     
     public BigDecimal getTotalIncome() {
-        List<Transaction> transactions = transactionRepository.findByType("INCOME");
+        List<Transaction> transactions = transactionRepository.findByType(Transaction.TransactionType.INCOME);
         return transactions.stream()
                 .map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
     
     public BigDecimal getTotalExpenses() {
-        List<Transaction> transactions = transactionRepository.findByType("EXPENSE");
+        List<Transaction> transactions = transactionRepository.findByType(Transaction.TransactionType.EXPENSE);
         return transactions.stream()
                 .map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
