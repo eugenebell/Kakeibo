@@ -11,7 +11,8 @@ public class YearlyBudget {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private Year year;
+    @Column(name = "budget_year")
+    private Year budgetYear;
     
     @Column(name = "budget_amount")
     private BigDecimal amount;
@@ -22,8 +23,8 @@ public class YearlyBudget {
     // Constructors
     public YearlyBudget() {}
     
-    public YearlyBudget(Year year, BigDecimal amount) {
-        this.year = year;
+    public YearlyBudget(Year budgetYear, BigDecimal amount) {
+        this.budgetYear = budgetYear;
         this.amount = amount;
     }
     
@@ -36,12 +37,12 @@ public class YearlyBudget {
         this.id = id;
     }
     
-    public Year getYear() {
-        return year;
+    public Year getBudgetYear() {
+        return budgetYear;
     }
     
-    public void setYear(Year year) {
-        this.year = year;
+    public void setBudgetYear(Year budgetYear) {
+        this.budgetYear = budgetYear;
     }
     
     public BigDecimal getAmount() {
