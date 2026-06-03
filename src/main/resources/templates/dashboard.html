@@ -1,82 +1,111 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<th:block th:replace="layout :: layout(title='Dashboard', content='dashboard-content')">
-</th:block>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakeibo - The Japanese Art of Mindful Saving</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
 <body>
-    <div class="container">
-        <h1 class="page-title">Dashboard</h1>
-        
-        <div class="grid">
-            <div class="card stat-card">
-                <div class="stat-value positive" th:text="${totalIncome}">0</div>
-                <div class="stat-label">Total Income</div>
+    <header class="header">
+        <div class="container nav-bar">
+            <a href="/" class="logo">
+                <i class="fas fa-wallet"></i>
+                <span>Kakeibo</span>
+            </a>
+            <nav class="nav-links">
+                <a href="/dashboard" class="nav-link">Dashboard</a>
+                <a href="/budgets" class="nav-link">Budgets</a>
+                <a href="/transactions" class="nav-link">Transactions</a>
+            </nav>
+        </div>
+    </header>
+    
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Dashboard</h1>
+            
+            <div class="grid">
+                <div class="card stat-card">
+                    <div class="stat-value positive" th:text="${totalIncome}">0</div>
+                    <div class="stat-label">Total Income</div>
+                </div>
+                
+                <div class="card stat-card">
+                    <div class="stat-value negative" th:text="${totalExpenses}">0</div>
+                    <div class="stat-label">Total Expenses</div>
+                </div>
+                
+                <div class="card stat-card">
+                    <div class="stat-value" th:text="${remainingBalance}">0</div>
+                    <div class="stat-label">Remaining Balance</div>
+                </div>
             </div>
             
-            <div class="card stat-card">
-                <div class="stat-value negative" th:text="${totalExpenses}">0</div>
-                <div class="stat-label">Total Expenses</div>
+            <div class="card">
+                <h2 class="card-title">Budget Overview</h2>
+                <div class="budget-summary">
+                    <div>
+                        <h3>Monthly Budget</h3>
+                        <p th:text="${monthlyBudgetAmount}">0</p>
+                    </div>
+                    <div>
+                        <h3>Spent</h3>
+                        <p th:text="${monthlySpentAmount}">0</p>
+                    </div>
+                    <div>
+                        <h3>Remaining</h3>
+                        <p th:text="${monthlyRemainingAmount}">0</p>
+                    </div>
+                </div>
+                <div class="budget-progress">
+                    <div class="progress-bar" style="width: 30%"></div>
+                </div>
             </div>
             
-            <div class="card stat-card">
-                <div class="stat-value" th:text="${remainingBalance}">0</div>
-                <div class="stat-label">Remaining Balance</div>
+            <div class="card">
+                <h2 class="card-title">Recent Transactions</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Salary</td>
+                            <td>2026-05-01</td>
+                            <td class="positive">+5000.00</td>
+                            <td>Income</td>
+                        </tr>
+                        <tr>
+                            <td>Grocery Shopping</td>
+                            <td>2026-05-03</td>
+                            <td class="negative">-150.75</td>
+                            <td>Expense</td>
+                        </tr>
+                        <tr>
+                            <td>Rent</td>
+                            <td>2026-05-05</td>
+                            <td class="negative">-1200.00</td>
+                            <td>Expense</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        
-        <div class="card">
-            <h2 class="card-title">Budget Overview</h2>
-            <div class="budget-summary">
-                <div>
-                    <h3>Monthly Budget</h3>
-                    <p th:text="${monthlyBudgetAmount}">0</p>
-                </div>
-                <div>
-                    <h3>Spent</h3>
-                    <p th:text="${monthlySpentAmount}">0</p>
-                </div>
-                <div>
-                    <h3>Remaining</h3>
-                    <p th:text="${monthlyRemainingAmount}">0</p>
-                </div>
-            </div>
-            <div class="budget-progress">
-                <div class="progress-bar" style="width: 30%"></div>
-            </div>
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>Kakeibo - The Japanese Art of Mindful Saving & Budgeting</p>
+            <p>© 2026 Eugene Bell</p>
         </div>
-        
-        <div class="card">
-            <h2 class="card-title">Recent Transactions</h2>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Description</th>
-                        <th>Date</th>
-                        <th>Amount</th>
-                        <th>Type</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Salary</td>
-                        <td>2026-05-01</td>
-                        <td class="positive">+5000.00</td>
-                        <td>Income</td>
-                    </tr>
-                    <tr>
-                        <td>Grocery Shopping</td>
-                        <td>2026-05-03</td>
-                        <td class="negative">-150.75</td>
-                        <td>Expense</td>
-                    </tr>
-                    <tr>
-                        <td>Rent</td>
-                        <td>2026-05-05</td>
-                        <td class="negative">-1200.00</td>
-                        <td>Expense</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+    </footer>
 </body>
 </html>
