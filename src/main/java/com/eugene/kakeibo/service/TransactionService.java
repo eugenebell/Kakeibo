@@ -1,7 +1,7 @@
 package com.eugene.kakeibo.service;
 
 import com.eugene.kakeibo.model.Transaction;
-import com.eugene.kakeibo.model.TransactionType;
+import com.eugene.kakeibo.model.Transaction.TransactionType;
 import com.eugene.kakeibo.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class TransactionService {
     }
 
     public BigDecimal getTotalIncome() {
-        List<Transaction> transactions = transactionRepository.findByType(TransactionType.INCOME);
+        List<Transaction> transactions = transactionRepository.findByType(Transaction.TransactionType.INCOME);
         return transactions.stream()
                 .map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
