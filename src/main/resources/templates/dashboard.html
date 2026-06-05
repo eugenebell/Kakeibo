@@ -72,28 +72,24 @@
                         <tr>
                             <th>Description</th>
                             <th>Date</th>
+                            <th>Category</th>
                             <th>Amount</th>
                             <th>Type</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Salary</td>
-                            <td>2026-05-01</td>
-                            <td class="positive">+5000.00</td>
-                            <td>Income</td>
+                        <tr th:if="${recentTransactions == null || recentTransactions.empty}">
+                            <td colspan="5" style="text-align: center;">No transactions found</td>
                         </tr>
-                        <tr>
-                            <td>Grocery Shopping</td>
-                            <td>2026-05-03</td>
-                            <td class="negative">-150.75</td>
-                            <td>Expense</td>
-                        </tr>
-                        <tr>
-                            <td>Rent</td>
-                            <td>2026-05-05</td>
-                            <td class="negative">-1200.00</td>
-                            <td>Expense</td>
+                        <tr th:if="${recentTransactions != null && !recentTransactions.empty}" th:each="transaction : ${recentTransactions}">
+                            <td th:text="${transaction.description}">-</td>
+                            <td th:text="${#temporals.format(transaction.date, 'yyyy-MM-dd')}">-</td>
+                            <td th:text="${transaction.category}">-</td>
+                            <td th:class="${transaction.type == 'INCOME' ? 'positive' : 'negative'}">
+                                <span th:if="${transaction.type == 'INCOME'}">+</span>
+                                <span th:text="${transaction.amount}">-</span>
+                            </td>
+                            <td th:text="${transaction.type}">-</td>
                         </tr>
                     </tbody>
                 </table>

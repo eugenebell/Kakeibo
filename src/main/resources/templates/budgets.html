@@ -30,7 +30,7 @@
             <div class="card">
                 <div class="budget-summary">
                     <h2 class="card-title">Create New Budget</h2>
-                    <button class="btn btn-primary">Add Budget</button>
+                    <a href="/budgets/new" class="btn btn-primary">Add Budget</a>
                 </div>
                 <form class="form-group">
                     <div class="form-row">
@@ -83,32 +83,24 @@
                             <th>Spent</th>
                             <th>Remaining</th>
                             <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Groceries</td>
-                            <td>Food & Dining</td>
-                            <td>400.00</td>
-                            <td>320.00</td>
-                            <td class="negative">80.00</td>
-                            <td>Active</td>
+                        <tr th:if="${budgets == null || budgets.empty}">
+                            <td colspan="7" style="text-align: center;">No budgets found</td>
                         </tr>
-                        <tr>
-                            <td>Rent</td>
-                            <td>Housing</td>
-                            <td>1200.00</td>
-                            <td>1200.00</td>
-                            <td class="negative">0.00</td>
-                            <td>Active</td>
-                        </tr>
-                        <tr>
-                            <td>Entertainment</td>
-                            <td>Entertainment</td>
-                            <td>200.00</td>
-                            <td>50.00</td>
-                            <td class="positive">150.00</td>
-                            <td>Active</td>
+                        <tr th:if="${budgets != null && !budgets.empty}" th:each="budget : ${budgets}">
+                            <td th:text="${budget.name}">-</td>
+                            <td th:text="${budget.category}">-</td>
+                            <td th:text="${budget.amount}">-</td>
+                            <td>0.00</td>
+                            <td th:text="${budget.amount}">-</td>
+                            <td><span class="positive">Active</span></td>
+                            <td>
+                                <a href="#" class="btn btn-secondary">Edit</a>
+                                <a href="#" class="btn btn-secondary">Delete</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
