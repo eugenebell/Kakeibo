@@ -30,63 +30,10 @@
             <div class="card">
                 <div class="budget-summary">
                     <h2 class="card-title">Add New Transaction</h2>
-                    <button class="btn btn-primary">Add Transaction</button>
+                    <a href="/transactions/new" class="btn btn-primary">Add Transaction</a>
                 </div>
-                <form class="form-group">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Description</label>
-                            <input type="text" class="form-control" placeholder="Transaction description">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Amount</label>
-                            <input type="number" class="form-control" placeholder="0.00">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Type</label>
-                            <select class="form-control">
-                                <option value="INCOME">Income</option>
-                                <option value="EXPENSE">Expense</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Category</label>
-                            <select class="form-control">
-                                <option>Food & Dining</option>
-                                <option>Housing</option>
-                                <option>Transportation</option>
-                                <option>Entertainment</option>
-                                <option>Utilities</option>
-                                <option>Healthcare</option>
-                                <option>Education</option>
-                                <option>Personal Care</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Date</label>
-                            <input type="date" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Budget</label>
-                            <select class="form-control">
-                                <option value="">No Budget</option>
-                                <option>Groceries</option>
-                                <option>Rent</option>
-                                <option>Entertainment</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">
-                            <input type="checkbox"> Mark as recurring
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Transaction</button>
-                </form>
+                
+                <!-- This form should be handled by transaction-form.html through proper controller -->
             </div>
             
             <div class="card">
@@ -99,29 +46,27 @@
                             <th>Category</th>
                             <th>Amount</th>
                             <th>Type</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Salary</td>
-                            <td>2026-05-01</td>
-                            <td>Income</td>
-                            <td class="positive">+5000.00</td>
-                            <td>Income</td>
+                        <tr th:if="${transactions == null || transactions.empty}">
+                            <td colspan="6" style="text-align: center;">No transactions found</td>
                         </tr>
-                        <tr>
-                            <td>Grocery Shopping</td>
-                            <td>2026-05-03</td>
-                            <td>Food & Dining</td>
-                            <td class="negative">-150.75</td>
-                            <td>Expense</td>
-                        </tr>
-                        <tr>
-                            <td>Rent</td>
-                            <td>2026-05-05</td>
-                            <td>Housing</td>
-                            <td class="negative">-1200.00</td>
-                            <td>Expense</td>
+                        <tr th:if="${transactions != null && !transactions.empty}" th:each="transaction : ${transactions}">
+                            <td th:text="${transaction.description}">-</td>
+                            <td th:text="${#temporals.format(transaction.date, 'yyyy-MM-dd')}">-</td>
+                            <td th:text="${transaction.category}">-</td>
+                            <td th:class="${transaction.type == 'INCOME' ? 'positive' : 'negative'}">
+                                <span th:if="${transaction.type == 'INCOME'}">+</span>
+                                <span th:text="${transaction.amount}">-</span>
+                            </td>
+                            <td th:text="${transaction.type}">-</td>
+                            <td>
+                                <a th:href="@{/transactions/{id}/edit(id=${transaction.id})}" class="btn btn-sm btn-secondary">Edit</a>
+                                <a th:href="@{/transactions/{id}/delete(id=${transaction.id})}" class="btn btn-sm btn-danger" 
+                                   onclick="return confirm('Are you sure you want to delete this transaction?')">Delete</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

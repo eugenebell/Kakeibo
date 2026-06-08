@@ -52,4 +52,16 @@ public class TransactionService {
                 .map(Transaction::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+    
+    // Helper method to calculate monthly spent amount
+    public BigDecimal getMonthlySpentAmount(int year, int month) {
+        LocalDate startDate = LocalDate.of(year, month, 1);
+        LocalDate endDate = startDate.plusMonths(1).minusDays(1); // Last day of the month
+        
+        List<Transaction> monthlyTransactions = transactionRepository.findByDateBetween(startDate, endDate);
+        return monthlyTransactions.stream()
+                .filter(transaction -> transaction.getType() == Transaction.TransactionType.EXPENSE)
+                .map(Transaction::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
 }
