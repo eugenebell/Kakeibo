@@ -9,6 +9,9 @@ Kakeibo is a Spring Boot application inspired by the Japanese art of mindful sav
 - **Transaction Management**: Comprehensive income and expense tracking
 - **Kubernetes-inspired UI**: Clean, modern interface with a focus on usability
 - **Responsive Design**: Works on desktop and mobile devices
+- **Dynamic Data Loading**: Templates now load data from backend instead of hardcoded values
+- **Complete CRUD Operations**: Full Create, Read, Update, Delete functionality for budgets and transactions
+- **Action Buttons**: Edit and Delete functionality available on all transaction and budget entries
 
 ## Architecture
 
@@ -86,6 +89,23 @@ src/
 │       ├── static/             # CSS, JS, images
 │       └── application.properties
 ```
+
+## Improvements Made
+
+### Dynamic Data Loading
+- All templates now load data from backend controllers instead of hardcoded values
+- Transactions and budgets display real database content  
+- Dashboard shows actual calculated financial information
+
+### Enhanced Functionality
+- Added Edit/Delete buttons to all transaction and budget entries
+- Full CRUD operations implemented for both budgets and transactions
+- Save buttons work correctly on all forms (Add/Edit pages)
+
+### User Experience
+- Clean, consistent interface across all pages 
+- Proper form handling with Spring Boot Thymeleaf integration
+- Confirmation dialogs for delete operations
 
 ## Kakeibo Method Principles
 
